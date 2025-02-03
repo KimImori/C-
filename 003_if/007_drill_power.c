@@ -19,23 +19,21 @@ int main()
     if (x <20){
         x_line = 1;
     }
-    else if (x > 20 && x <= 50){
+    else if (x >= 20 && x <= 50){
 
         x_line = 2;
     }
-    else if (x > 50)
+    else if (x >= 60 && y > 80)
     {
         x_line = 3;
     }
     
 // проверка - в квадрате или нет.
-    if(40 <= x < 80 && 40<= y <80)
+    if((40 <= x) && (x < 80) && (40 <= y) && (y < 80))
     {
         in_square = 1;
 
     }
-
-
 
 
 // Первый участок 30
@@ -69,7 +67,7 @@ if(x_line == 3 && in_square == 1)
     power = 80;
     printf("Мощность бура должна составлять %u\n", power);
 }
-else if (x_line = 3 && in_square == 0)
+else if (x_line == 3 && in_square == 0)
 {
     power = 30;
     printf("Мощность бура должна составлять %u\n", power);
