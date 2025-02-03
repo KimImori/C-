@@ -41,39 +41,19 @@ int main()
     {
     case 1: // Первый участок
         power = 30;
-        printf("Мощность бура должна составлять %u\n", power);
         break;
-
     case 2: // Второй участок
-        if (in_square == 1)
-        {
-            power = 50;
-            printf("Мощность бура должна составлять %u\n", power);
-        }
-        else
-        {
-            power = 0;
-            printf("Мощность бура должна составлять %u\n", power);
-        }
+        power = (is_square ? 50 : 0);
         break;
-
     case 3: // Третий участок
-        if (in_square == 1)
-        {
-            power = 80;
-            printf("Мощность бура должна составлять %u\n", power);
-        }
-        else
-        {
-            power = 30;
-            printf("Мощность бура должна составлять %u\n", power);
-        }
+        power = (in_square ? 80 : 30);
         break;
-
     default:
         printf("Сюда не должны попасть\n");
         break;
     }
+
+    printf("Мощность бура должна составлять %u\n", power);
 
     return 0;
 }

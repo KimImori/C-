@@ -38,6 +38,7 @@
 
 #include <stdio.h>
 
+// --------------------------------------------------------
 unsigned int PRICE_TARIF_1 = 500;
 unsigned int FREE_MB_1 = 5000;
 unsigned int PACKET_MB_1 = 100;
@@ -46,6 +47,25 @@ unsigned int FREE_SMS_1 = 50;
 unsigned int PRICE_SMS_1 = 10;
 unsigned int FREE_MIN_1 = 0;
 unsigned int PRICE_MIN_1 = 2;
+// --------------------------------------------------------
+unsigned int PRICE_TARIF_2 = 300;
+unsigned int FREE_MB_2 = 1000;
+unsigned int PACKET_MB_2 = 100;
+unsigned int PRICE_MB_PACKET_2 = 20;
+unsigned int FREE_SMS_2 = 20;
+unsigned int PRICE_SMS_2 = 15;
+unsigned int FREE_MIN_2 = 120;
+unsigned int PRICE_MIN_2 = 3;
+// --------------------------------------------------------
+unsigned int PRICE_TARIF_3 = 0;
+unsigned int FREE_MB_3 = 0;
+unsigned int PACKET_MB_3 = 100;
+unsigned int PRICE_MB_PACKET_3 = 30;
+unsigned int FREE_SMS_3 = 0;
+unsigned int PRICE_SMS_3 = 20;
+unsigned int FREE_MIN_3 = 0;
+unsigned int PRICE_MIN_3 = 4;
+// --------------------------------------------------------
 
 int main()
 {
@@ -88,14 +108,6 @@ int main()
     }
 
     // ЦЕНА 2 ТАРИФ
-    unsigned int PRICE_TARIF_2 = 300;
-    unsigned int FREE_MB_2 = 1000;
-    unsigned int PACKET_MB_2 = 100;
-    unsigned int PRICE_MB_PACKET_2 = 20;
-    unsigned int FREE_SMS_2 = 20;
-    unsigned int PRICE_SMS_2 = 15;
-    unsigned int FREE_MIN_2 = 120;
-    unsigned int PRICE_MIN_2 = 3;
 
     unsigned int  total_cost_2;
 
@@ -127,17 +139,7 @@ int main()
     }
 
     // ЦЕНА 3 ТАРИФА
-
-    unsigned int PRICE_TARIF_3 = 0;
-    unsigned int FREE_MB_3 = 0;
-    unsigned int PACKET_MB_3 = 100;
-    unsigned int PRICE_MB_PACKET_3 = 30;
-    unsigned int FREE_SMS_3 = 0;
-    unsigned int PRICE_SMS_3 = 20;
-    unsigned int FREE_MIN_3 = 0;
-    unsigned int PRICE_MIN_3 = 4;
-
-     unsigned int total_cost_3;
+    unsigned int total_cost_3;
 
     total_cost_3 = PRICE_TARIF_3;
 
@@ -146,10 +148,10 @@ int main()
         // ИЗМЕНЯЕМ ПЕРЕМЕННУЮ !!!
         unsigned int mb_for_tarif_3;
         mb_for_tarif_3 = mb_1 - FREE_MB_3;
-        total_cost_2 += mb_for_tarif_3 * PRICE_MB_PACKET_2 / PACKET_MB_2;
+        total_cost_3 += mb_for_tarif_3 * PRICE_MB_PACKET_3 / PACKET_MB_3;
         if (mb_for_tarif_3 % PACKET_MB_3 != 0)
         {
-            total_cost_2 += PRICE_MB_PACKET_2;
+            total_cost_3 += PRICE_MB_PACKET_3;
         }
     }
 
