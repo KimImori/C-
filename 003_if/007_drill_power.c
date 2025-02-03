@@ -19,17 +19,21 @@ int main()
     if (x <20){
         x_line = 1;
     }
-    else if (x >= 20 && x <= 50){
+    else if (x <= 50)
+    {
 
         x_line = 2;
     }
-    else if (x >= 60 && y > 80)
+    else
     {
         x_line = 3;
     }
     
 // проверка - в квадрате или нет.
-    if((40 <= x) && (x < 80) && (40 <= y) && (y < 80))
+    int is_x_in_square = 40 <= x && x < 80;
+    int is_y_in_square = 40 <= y && y < 80;
+
+    if(is_x_in_square && is_y_in_square)
     {
         in_square = 1;
 
