@@ -97,18 +97,15 @@ int main()
     unsigned int FREE_MIN_2 = 120;
     unsigned int PRICE_MIN_2 = 3;
 
-    unsigned int mb_2, sms_2, min_2, total_cost_2;
-    mb_2 = mb_1;
-    sms_2 = sms_1;
-    min_2 = min_1;
+    unsigned int  total_cost_2;
 
     total_cost_2 = PRICE_TARIF_2;
 
-    if (mb_2 > FREE_MB_2) // нужна тарификация
+    if (mb_1 > FREE_MB_2) // нужна тарификация
     {
         // ИЗМЕНЯЕМ ПЕРЕМЕННУЮ !!!
         unsigned int mb_for_tarif_2;
-        mb_for_tarif_2 = mb_2 - FREE_MB_2; // Убираем бесплатные мегабайты
+        mb_for_tarif_2 = mb_1 - FREE_MB_2; // Убираем бесплатные мегабайты
         total_cost_2 += mb_for_tarif_2 * PRICE_MB_PACKET_2 / PACKET_MB_2;
         if (mb_for_tarif_2 % PACKET_MB_2 != 0)
         {
@@ -116,16 +113,16 @@ int main()
         }
     }
 
-    if (sms_2 > FREE_SMS_2) // нужна тарификация
+    if (sms_1> FREE_SMS_2) // нужна тарификация
     {
         // ИЗМЕНЯЕМ ПЕРЕМЕННУЮ !!!
-        unsigned int sms_2_tarif = sms_2 - FREE_SMS_2; // Убираем бесплатные смс
+        unsigned int sms_2_tarif = sms_1 - FREE_SMS_2; // Убираем бесплатные смс
         total_cost_2 += sms_2_tarif * PRICE_SMS_2;
     }
-    if (min_2 > FREE_MIN_2) // нужна тарификация
+    if (min_1 > FREE_MIN_2) // нужна тарификация
     {
         // ИЗМЕНЯЕМ ПЕРЕМЕННУЮ !!!
-        unsigned int min_2_tarif = min_2 - FREE_MIN_2; // Убираем бесплатные минуты
+        unsigned int min_2_tarif = min_1 - FREE_MIN_2; // Убираем бесплатные минуты
         total_cost_2 += min_2_tarif * PRICE_MIN_2;
     }
 
@@ -140,18 +137,15 @@ int main()
     unsigned int FREE_MIN_3 = 0;
     unsigned int PRICE_MIN_3 = 4;
 
-    unsigned int mb_3, sms_3, min_3, total_cost_3;
-    mb_3 = mb_2;
-    sms_3 = sms_2;
-    min_3 = min_2;
+     unsigned int total_cost_3;
 
     total_cost_3 = PRICE_TARIF_3;
 
-    if (mb_3 > FREE_MB_3) // нужна тарификация
+    if (mb_1 > FREE_MB_3) // нужна тарификация
     {
         // ИЗМЕНЯЕМ ПЕРЕМЕННУЮ !!!
         unsigned int mb_for_tarif_3;
-        mb_for_tarif_3 = mb_3 - FREE_MB_3;
+        mb_for_tarif_3 = mb_1 - FREE_MB_3;
         total_cost_2 += mb_for_tarif_3 * PRICE_MB_PACKET_2 / PACKET_MB_2;
         if (mb_for_tarif_3 % PACKET_MB_3 != 0)
         {
@@ -159,16 +153,16 @@ int main()
         }
     }
 
-    if (sms_3 > FREE_SMS_3) // нужна тарификация
+    if (sms_1 > FREE_SMS_3) // нужна тарификация
     {
         // ИЗМЕНЯЕМ ПЕРЕМЕННУЮ !!!
-        unsigned int sms_3_tarif = sms_3 - FREE_SMS_3; // Убираем бесплатные смс
+        unsigned int sms_3_tarif = sms_1 - FREE_SMS_3; // Убираем бесплатные смс
         total_cost_3 += sms_3_tarif * PRICE_SMS_3;
     }
-    if (min_3 > FREE_MIN_3) // нужна тарификация
+    if (min_1> FREE_MIN_3) // нужна тарификация
     {
         // ИЗМЕНЯЕМ ПЕРЕМЕННУЮ !!!
-        unsigned int min_3_tarif = min_3 - FREE_MIN_3; // Убираем бесплатные минуты
+        unsigned int min_3_tarif = min_1 - FREE_MIN_3; // Убираем бесплатные минуты
         total_cost_3 += min_3_tarif * PRICE_MIN_3;
     }
 
