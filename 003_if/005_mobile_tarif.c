@@ -40,22 +40,23 @@
 int main()
 {
 
-    unsigned int mb, sms, min, gb, cost_tarif;
-    printf("Введите мегабайты\n");
-    printf("Введите смс\n");
-    printf("Введите минуты\n");
-    scanf("%u %u %u", &mb, &sms, &min);
+    unsigned int mb, sms, min, gb, cost_tarif, cost;
+    printf("Введите мегабайты");
+    scanf("%u", &mb);
+    printf("Введите смс");
+    scanf("%u", &sms);
+    printf("Введите минуты");
+    scanf("%u", &min);
 
     unsigned int MAX_SMS = 50;
     unsigned int MAX_MB = 5000;
+    cost = mb / 100;
 
-    if (mb > MAX_MB)
+    if (mb % 100 != 0)
     {
         mb = mb - MAX_MB;
-         mb = mb / 100 * 15;
-         printf("Цена за мегабайты %u\n", mb);
-
-
+        cost = mb + 1;
+        printf("Цена за мегабайты %u\n", cost);
     }
 
     return 0;
