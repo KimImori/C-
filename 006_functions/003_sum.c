@@ -10,5 +10,5 @@ int main()
 {
     int x = (sum(2,3) * 2) / 3;
     printf("%d\n", x);
-
+    return 0;
 }
