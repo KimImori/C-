@@ -17,27 +17,27 @@
 
 int main() {
 
-    unsigned int sec;
-    scanf("%u", &sec);
-    unsigned int SEC_IN_MIN = 60;
-    unsigned int SEC_IN_HOUR = SEC_IN_MIN * 60;
-    unsigned int SEC_IN_DAY = SEC_IN_HOUR * 24;
-    unsigned int SEC_IN_YEAR = SEC_IN_DAY * 365;
+    unsigned long sec;
+    scanf("%lu", &sec);
+    unsigned long SEC_IN_MIN = 60;
+    unsigned long SEC_IN_HOUR = SEC_IN_MIN * 60;
+    unsigned long SEC_IN_DAY = SEC_IN_HOUR * 24;
+    unsigned long SEC_IN_YEAR = SEC_IN_DAY * 365;
 
-    unsigned int years = sec / SEC_IN_YEAR;
+    unsigned long years = sec / SEC_IN_YEAR;
     sec %= SEC_IN_YEAR;
-    unsigned int days = sec / SEC_IN_DAY;
+    unsigned long days = sec / SEC_IN_DAY;
     sec %= SEC_IN_DAY;
-    unsigned int hours = sec / SEC_IN_HOUR;
+    unsigned long hours = sec / SEC_IN_HOUR;
     sec %= SEC_IN_HOUR;
-    unsigned int mins = sec / SEC_IN_MIN;
+    unsigned long mins = sec / SEC_IN_MIN;
     sec %= SEC_IN_MIN;
-    unsigned int remaining_seconds = sec;
-    printf("Y=%u\n", years);
-    printf("D=%u\n", days);
-    printf("H=%u\n", hours);
-    printf("M=%u\n", mins);
-    printf("Remainged Sec=%u\n", sec);
+    unsigned long remaining_seconds = sec;
+    printf("Y=%lu\n", years);
+    printf("D=%lu\n", days);
+    printf("H=%lu\n", hours);
+    printf("M=%lu\n", mins);
+    printf("Remainged Sec=%lu\n", sec);
 
 
     return 0;
