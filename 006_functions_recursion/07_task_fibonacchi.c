@@ -23,6 +23,19 @@ unsigned int fibonacci(unsigned int n)
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
+unsigned int fib_loop(unsigned int n) {
+    unsigned int a, b, c;
+    a = 0;
+    b = 1;
+    c = 0;
+    for (int i = 0; i < n; i++) {
+        a = b+c;
+        b = c;
+        c = a;
+    }
+    return a;
+}
+
 int main()
 {
     unsigned int n;
@@ -31,7 +44,7 @@ int main()
         return -1;
     }
 
-    printf("Число фибоначи под номером %u = %u\n",n, fibonacci(n));
+    printf("Число фибоначи под номером %u = %u\n",n, fib_loop(n));
 
     return 0;
 }
