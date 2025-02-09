@@ -9,8 +9,11 @@ fib(n) = fib(n-1) + fib(n-2)
 
 */
 
+unsigned int FIB_REC_COUNTER = 0;
+
 unsigned int fibonacci(unsigned int n)
 {
+    FIB_REC_COUNTER++;
     if (n == 0)
     {
         return 0;
@@ -44,7 +47,8 @@ int main()
         return -1;
     }
 
-    printf("Число фибоначи под номером %u = %u\n",n, fib_loop(n));
+    printf("Число фибоначи под номером %u = %u\n",n, fibonacci(n));
+    printf("Количество вызовов рекурсии %u \n",FIB_REC_COUNTER);
 
     return 0;
 }
