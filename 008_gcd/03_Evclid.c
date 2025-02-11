@@ -1,5 +1,16 @@
 #include <stdio.h>
 
+
+int abs_1(int num)
+{
+
+    if (num < 0)
+    {
+        return -num;
+    }
+    return num;
+}
+
 int main()
 {
     int a, b;
@@ -7,6 +18,9 @@ int main()
     {
         return 1;
     }
+
+    a = abs_1(a);
+    b = abs_1(b);
 
     while (b != 0)
     {
