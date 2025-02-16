@@ -14,7 +14,6 @@ int max_arr(const int arr[], size_t n)
 }
 
 int min_arr(const int arr[], size_t n)
-
 {
     int min = arr[0];
     for (size_t i = 1; i < n; i++)
