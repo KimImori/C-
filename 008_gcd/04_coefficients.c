@@ -25,7 +25,7 @@ void coeff(int numerator, int denominator)
         int whole_part = numerator / denominator;
         printf("Целая часть - %d", whole_part);
     }
-}
+} 
 
 int main()
 {
