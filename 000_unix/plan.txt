@@ -1,0 +1,16 @@
+sudo apt-get upate
+sudo apt-get upgrade
+sudo apt-get install <package-name>
+apt search --names-only '^gcc-?[0-9]*$'
+
+* all is file
+* man ls
+
+cat <filename.c>
+
+
+* stdout/stdin/stderr
+
+* перенаправление stdout/
+
+* env
