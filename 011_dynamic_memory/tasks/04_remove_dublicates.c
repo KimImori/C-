@@ -9,11 +9,30 @@
 // если элемент есть в новом массиве через функцию contains,
 // то пропускаем, иначе  добавляем
 
+// 1) у тебя есть функция которая проверяет есть ли в массиве число (да/нет)
+// 2) тебе нужно удалить дубликаты из оригинального массива
+// 3) для этого тебе нужно завести массив в который ты запишешь результат без дубликатов
+// 4) возникает вопрос а какого размера будет новый массив
+// 4.1) тут нужно понять возможные случаи чтобы оценить размер
+// 4.2) если на вход тебе дать массив только из {1,1,1,1,1,1,1,1,}  то на выходе будет массив размера 1 {1}
+// 4.3) если на вход дать массив в котором нет дубликатов, то на выходе он и получится {1,2,3,4,5} -> {1,2,3,4,5}
+// 4.4) получается что худший случай это когда размер нового массива полностью равен размеру исходного массива
+// 4.5) поэтому резервируем память чтобы вместить весь исходный массив
+// 5) бежим по исходному массиву
+// 6) проверяем если элемент из исходного массива уже есть в новом массиве то пропускаем, если элемента нет то доавляем в массив
+// 6.1) тут нужно два индекса i - чтобы бежать по исходному массиву j - чтобы бежать по новому массиву j изменяется только если ты добавляешь элемент в массив
+
 #include <stdio.h>
 #include <stdbool.h>
 #include "../../library/array_utils.h"
-
-bool contains(int arr[], size_t len, int element)
+#include <stdlib.h>
+/*
+Есть оригинальный массив,затем мы создаём пустой массив
+ и начинаем идти по оригинальному массиву
+  и спрашивать у пустого есть ли у тебя этот элемент
+  если нет ,то запиши его в новый массив,если уже записан
+*/
+bool contains(const int arr[], size_t len, int element)
 {
     for (int i = 0; i < len; i++)
     {
@@ -25,25 +44,40 @@ bool contains(int arr[], size_t len, int element)
     return false;
 }
 
-void del_dupl(int arr[], size_t len, int arr_result[])
+int* del_dupl(const int* arr, size_t len_arr, size_t* new_arr_len)
 {
-    int result_len = 0;
-    for (int i = 0; i < len; i++)
+    int* result = malloc(len_arr * sizeof(int));
+    if (result == NULL)
     {
-        if (!contains(arr_result, result_len, arr[i]))
-        {
-            arr_result[result_len++] = arr[i];
-        }
+        return NULL;
     }
+    *new_arr_len = 0; 
+    for(size_t i = 0; i < len_arr;i++)
+    {
+        bool is_contains = contains(result,*new_arr_len,arr[i]);
+        if(is_contains)
+        {
+            continue;
+        }
+        result[*new_arr_len] = arr[i];
+        (*new_arr_len)++;
+    }
+    return result;
+   
 }
 
 int main()
 {
-    int arr_1[] = {1, 2, 3, 2, 3, 3, 5, 6, 5};
+    int arr_1[] = {1, 2, 3, 2, 3, 3, 5, 7, 5};
     int len_arr = sizeof(arr_1) / sizeof(arr_1[0]);
-    int result[len_arr];
-    del_dupl(arr_1, len_arr, result);
-    print_array(result, len_arr);
-
+    size_t new_arr_len;
+    int* arr_without_dupl = del_dupl(arr_1,len_arr,&new_arr_len);
+    if(arr_without_dupl == NULL)
+    {
+        return 1;
+    }
+    print_array(arr_1,len_arr);
+    print_array(arr_without_dupl,new_arr_len);
+    free(arr_without_dupl);
     return 0;
 }
