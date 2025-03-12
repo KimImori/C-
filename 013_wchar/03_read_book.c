@@ -65,9 +65,6 @@ int main()
     }
     book[i] = L'\0';
 
-
-    //printf("Book: %ls\n", book);
-
     int start_index;
     int length_of_longest_word;
     dan_longest_word(book, &start_index, &length_of_longest_word);
