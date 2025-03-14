@@ -22,6 +22,7 @@ typedef struct __Stations {
 } Stations;
 
 Stations make_stations(size_t n);
+void free_stations(Stations* s);
 bool is_station_signal_cover_point(const Station *s, Point p);
 void print_station(const Station* s);
 void print_stations_which_cover_point(Stations stations, Point p);
@@ -34,6 +35,7 @@ int main()
         .y = 15
     };
     print_stations_which_cover_point(stations, p);
+    free_stations(&stations);
     return 0;
 }
 
@@ -116,3 +118,22 @@ void print_stations_which_cover_point(Stations stations, Point p)
     }
 }
 
+void free_stations(Stations* s)
+{
+    if (s == NULL)
+    {
+        return;
+    }
+    
+    // Идем по каждому элемента массива Stations
+    // и для каждого элемента очищаем его имя
+    for(size_t i=0; i < s->len; i++)
+    {
+        Station station = s->arr[i];
+        free(station.name);
+    }
+    
+    s->len = 0;
+    free(s->arr);
+    return;
+}
