@@ -24,7 +24,7 @@ typedef enum
 } USER_CHOICE;
 
 void game();
-void status(Hero hero, Dragon dragon);
+void status(const Hero *hero, const Dragon *dragon);
 void attack_dragon(Hero *hero, Dragon *dragon);
 void use_potion(Hero *hero);
 void exit_();
@@ -57,7 +57,7 @@ void game()
         switch (user_choice)
         {
         case STATUS:
-            status(hero, dragon);
+            status(&hero, &dragon);
             break;
         case ATTACK_DRAGON:
             attack_dragon(&hero, &dragon);
@@ -73,8 +73,6 @@ void game()
         }
         press_for_continue();
     }
-
-
 }
 
 void print_menu()
@@ -83,7 +81,7 @@ void print_menu()
     printf("Menu\n");
     printf("1- Cтатус героя\n");
     printf("2- Атаковать дракона\n");
-    printf("3- Использолвать зелья\n");
+    printf("3- Использовать зелья\n");
     printf("4- Выход\n");
     printf("--------------------------------\n");
 }
@@ -108,15 +106,37 @@ void press_for_continue()
     getchar();
 }
 
-void status(Hero hero, Dragon dragon)
+void status(const Hero *hero, const Dragon *dragon)
 {
-    printf("Герой: Здоровье= %d, Урон= %d, Зелья= %d\n", hero.health, hero.attack, hero.potions);
-    printf("Дракон: Здоровье= %d, Урон= %d\n", dragon.health, dragon.attack);
+    if (hero == NULL || dragon == NULL)
+    {
+        return;
+    }
+    printf("Герой: Здоровье= %d, Урон= %d, Зелья= %d\n", hero->health, hero->attack, hero->potions);
+    printf("Дракон: Здоровье= %d, Урон= %d\n", dragon->health, dragon->attack);
+}
+
+int my_random(int min, int max)
+{
+    return min + rand() / (RAND_MAX / (max - min + 1) + 1);
+}
+
+int calculate_damage(int base_damage)
+{
+    int result = base_damage;
+    int percent = my_random(0, 10);
+    int add_damage = (result * percent) / 100;
+    result += add_damage;
+    if (my_random(1, 100) == 15)
+    {
+        result *= 5;
+    }
+    return result;
 }
 
 void attack_dragon(Hero *hero, Dragon *dragon)
 {
-    if(hero == NULL || dragon == NULL)
+    if (hero == NULL || dragon == NULL)
     {
         return;
     }
@@ -130,20 +150,17 @@ void attack_dragon(Hero *hero, Dragon *dragon)
         printf("Победа!\n");
         return;
     }
-
-    dragon->health -= hero->attack;
-    printf("Вы атаковали дракона его здоровье = %d\n", dragon->health);
-
+    dragon->health -= calculate_damage(hero->attack);
     if (dragon->health > 0)
     {
-        hero->health -= dragon->attack;
+        hero->health -= calculate_damage(dragon->attack);
         printf("Дракон атаковал вас, ваше здоровье = %d\n", hero->health);
     }
 }
 
 void use_potion(Hero *hero)
 {
-    if(hero == NULL)
+    if (hero == NULL)
     {
         return;
     }

@@ -37,10 +37,11 @@ typedef struct __Hotel
     Room *rooms;
     size_t len_rooms;
 } Hotel;
-
+void clear_buffer(void);
 Hotel create_hotel(size_t len_rooms);
 void free_hotel(Hotel *hotel);
-int reserve_room(Hotel *hotel, room_id id,Guest *guest);
+int reserve_room(Hotel *hotel, room_id id, Guest *guest);
+void free_guest(Guest *guest);
 int free_room(Hotel *hotel, room_id id);
 Room *get_room_by_id(Hotel *hotel, room_id id);
 int get_reserved_rooms_count_by_type(const Hotel *hotel, ROOM_TYPE type);
@@ -140,7 +141,20 @@ int process_user_choice(USER_CHOICE user_choice, Hotel *h)
         if (scanf("%u", &room_number) == 1)
         {
             Guest *g = malloc(sizeof(Guest));
-            g->name = "Dan";
+            if(g == NULL)
+            {
+                break;
+            }
+            char *name = malloc(255);
+            if(name == NULL)
+            {
+                free_guest(g);
+                break;
+            }
+            printf("Please, enter name\n");
+            clear_buffer();
+            fgets(name, 255, stdin);
+            g->name = name;
             int result = reserve_room(h, room_number, g);
             if (result)
             {
@@ -183,13 +197,12 @@ int process_user_choice(USER_CHOICE user_choice, Hotel *h)
     }
     return 1;
 }
+
 void press_for_continue()
 {
     char c;
     printf("Press any key for continue\n");
-    while ((c = getchar()) != '\n' && c != EOF)
-    {
-    }
+    clear_buffer();
     getchar();
 }
 
@@ -225,9 +238,9 @@ void free_hotel(Hotel *hotel)
     {
         return;
     }
-    for(size_t i = 0; i < hotel->len_rooms;i++)
+    for (size_t i = 0; i < hotel->len_rooms; i++)
     {
-        free(hotel->rooms[i].guest);
+        free_guest(hotel->rooms[i].guest);
     }
     free(hotel->rooms);
     hotel->len_rooms = 0;
@@ -249,7 +262,7 @@ Room *get_room_by_id(Hotel *hotel, room_id id)
     return NULL;
 }
 
-int reserve_room(Hotel *hotel, room_id id,Guest *guest)
+int reserve_room(Hotel *hotel, room_id id, Guest *guest)
 {
     if (hotel == NULL || guest == NULL)
     {
@@ -258,10 +271,12 @@ int reserve_room(Hotel *hotel, room_id id,Guest *guest)
     Room *room = get_room_by_id(hotel, id);
     if (room == NULL)
     {
+        free_guest(guest);
         return 0;
     }
     if (room->guest != NULL)
     {
+        free_guest(guest);
         return 0;
     }
     room->guest = guest;
@@ -279,7 +294,7 @@ int free_room(Hotel *hotel, room_id id)
     {
         return 0;
     }
-    free(room->guest);
+    free_guest(room->guest);
     room->guest = NULL;
     return 1;
 }
@@ -323,4 +338,22 @@ int get_reserved_rooms_price_by_type(const Hotel *hotel, ROOM_TYPE type)
         }
     }
     return price;
+}
+
+void clear_buffer()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+    {
+    }
+}
+
+void free_guest(Guest *guest)
+{
+    if(guest == NULL)
+    {
+        return;
+    }
+    free(guest->name);
+    free(guest);
 }

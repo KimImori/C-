@@ -6,6 +6,7 @@
         "string.h": "c",
         "stdbool.h": "c",
         "wchar.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "stdlib.h": "c"
     }
 }
