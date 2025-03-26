@@ -26,9 +26,5 @@ int main()
     int arr[3] = {1,2,3};
     int sum = product_arr(arr,3);
     printf("%d\n",sum);
-
-
-
-
     return 0;
 }
