@@ -1,0 +1,28 @@
+#1
+./a.out apple orange banana
+    apple banana orange
+
+#2
+./a.out 1 2 3
+1 2 3
+
+#3
+./a.out 3 2 1
+1 2 3
+
+#4
+./a.out 10 2 apple 35 380
+10 2 35 380 apple
+
+#5
+./a.out null
+null
+
+#6
+./a.out
+Error invalid arg
+
+План работ:
+#1
+нужна сортировка массива сортировка
+
