@@ -45,10 +45,11 @@ void sort_arr(int *arr, size_t n)
 {
     for (size_t i = 0; i < n; i++)
     {
-        int max_index = find_max_index(arr, n - i);
-        if (max_index != n - i - 1)
+        size_t current_size = n - i;
+        int max_index = find_max_index(arr, current_size);
+        if (max_index != current_size - 1)
         {
-            swap(arr + (n - i - 1), arr + max_index);
+            swap(arr + (current_size - 1), arr + max_index);
         }
     }
 }
