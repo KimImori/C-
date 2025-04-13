@@ -29,12 +29,26 @@ typedef struct __CsvRow
     size_t len;
 }CsvRow;
 
+//Использовать данную структуру
+typedef struct __CsvFile
+{
+    CsvRow* arr;
+    size_t len;
+}CsvFile;
+
 
 
 
 CsvRow parse_csv_row(const char *str,int column_len);
 int find_index_char(const char *str,char symbol);
 char* find_substr(const char *str,size_t start,size_t end);
+
+/*
+Написать данные функции
+CsvFile parse_csv_file(char* file_name, size_t row_numbers);
+void free_csv_file(CsvFile* file);
+*/
+
 
 
 
