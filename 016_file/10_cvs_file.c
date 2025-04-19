@@ -3,6 +3,16 @@
 #include <string.h>
 #include <assert.h>
 
+/*
+1) имей буффер на чтение 1 строки, тут достаточно до 255 символов(те это просто буффер-строка)
+2) создай динамический массив для CsvRow на 5000 элементов, те это массив из 5000 CsvRow
+3) в цикле читай строку из файла в буффер строки
+4) бери сырую строку и вызови свою функцию которая ее распарситт в CsvRow
+5) положи CsvRow в динамический, каждый раз увеличвая индекс
+6) размер массив в  CsvFile - это количество прочитанных строк, но не больше 5000  иначе буде переполнение
+
+*/
+
 typedef char *csv_cell;
 
 typedef struct __CsvRow
@@ -22,24 +32,25 @@ int find_index_char(const char *str, char symbol);
 char *find_substr(const char *str, size_t start, size_t end);
 CsvFile parse_csv_file(char *file_name, size_t row_numbers);
 void free_csv_file(CsvFile *file);
+size_t count_char(const char *str, char symbol);
+void print_csv(CsvFile file);
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    if (argc != 2)
     {
         fprintf(stderr, "%s <csv_file> \n", argv[0]);
         return 1;
     }
-
     char *file_name = argv[1];
-    
+
     CsvFile file = parse_csv_file(file_name, 0);
     if (file.arr == NULL)
     {
         fprintf(stderr, "Ошибка\n");
         return -1;
     }
-
+    print_csv(file);
     free_csv_file(&file);
     return 0;
 }
@@ -126,44 +137,85 @@ CsvFile parse_csv_file(char *file_name, size_t row_numbers)
     FILE *file = fopen(file_name, "r");
     if (file == NULL)
     {
-        return file;
+        perror("Error opening");
+        file_1.arr = NULL;
+        file_1.len = 0;
+        return file_1;
     }
-    file_1.arr = malloc(5000 * sizeof(CsvRow));
+    file_1.arr = malloc(row_numbers * sizeof(CsvRow));
     if (file_1.arr == NULL)
     {
-        return file;
+        file_1.arr = NULL;
+        file_1.len = 0;
+        fclose(file);
+        return file_1;
     }
 
     char buffer[255];
     size_t current_row = 0;
+    size_t column_len = 0;
     while (fgets(buffer, sizeof(buffer), file) != NULL)
     {
-        CsvRow row = parse_csv_row(buffer);
+        if (column_len == 0)
+        {
+            column_len = count_char(buffer, ',') + 1;
+        }
+        buffer[strlen(buffer) - 1] = '\0';
+        CsvRow row = parse_csv_row(buffer, column_len);
         file_1.arr[current_row] = row;
         current_row++;
+    }
+    if (!feof(file))
+    {
+        perror("Error reading");
+        file_1.arr = NULL;
+        file_1.len = 0;
+        fclose(file);
+        return file_1;
     }
 
     file_1.len = current_row;
     fclose(file);
-    return file;
+    return file_1;
 }
 
 void free_csv_file(CsvFile *file)
 {
-    if (file == NULL)
+    if(file == NULL)
     {
         return;
     }
-    for (size_t i = 0; i < file->len; i++)
+    for(size_t i = 0;)
+}
+
+size_t count_char(const char *str, char symbol)
+{
+    if (str == NULL)
     {
-        CsvRow row = file->arr[i];
-        if (row.arr != NULL)
-        {
-            for (size_t j = 0; j < row.len; j++)
-            {
-                free(row.arr[j]);
-            }
-        }
+        return 0;
     }
-    free(file->arr);
+    size_t counter = 0;
+    while (*str != '\0')
+    {
+        if (*str == symbol)
+        {
+            counter++;
+        }
+        str++;
+    }
+    return counter;
+}
+
+void print_csv(CsvFile file)
+{
+    for (size_t i = 0; i < file.len; i++)
+    {
+        CsvRow row = file.arr[i];
+        for (size_t j = 0; j < row.len; j++)
+        {
+            csv_cell cell = row.arr[j];
+            printf("%s,", cell);
+        }
+        printf("\n");
+    }
 }
