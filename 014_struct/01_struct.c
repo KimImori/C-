@@ -27,7 +27,7 @@ int main()
 {
     char name_static_array[10];
     strcpy(name_static_array, "Denis");
-    
+    printf("%d", u.age)
     Employe user_1 = {
         .id = 125,
         .age = 25,
