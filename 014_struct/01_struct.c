@@ -7,7 +7,7 @@ typedef struct __Employe {
     unsigned char age;
     unsigned char experience;
     float salary;
-    // char name[255];
+    //char name[255];
     char *name;
 } Employe;
 
