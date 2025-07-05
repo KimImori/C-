@@ -9,6 +9,7 @@
         "math.h": "c",
         "stdlib.h": "c",
         "csv.h": "c",
-        "string_utils.h": "c"
+        "string_utils.h": "c",
+        "array_utils.h": "c"
     }
 }
