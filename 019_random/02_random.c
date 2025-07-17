@@ -5,14 +5,14 @@
 // [from; to]
 int my_rand(int from, int to)
 {
-    int c = to-from+1;
+    int c = to - from + 1;
     return (rand() % c) + from;
 }
 
 // [from; to)
 int my_rand_2(int from, int to)
 {
-    int c = to-from;
+    int c = to - from;
     return (rand() % c) + from;
 }
 

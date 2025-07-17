@@ -17,6 +17,7 @@ void my_rand()
     for(int i=0; i<100; i++)
     {
         printf("%d ", rand() % 100);
+        
     }
 }
 
