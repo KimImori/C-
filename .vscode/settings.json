@@ -12,6 +12,13 @@
         "string_utils.h": "c",
         "array_utils.h": "c",
         "random_utils.h": "c",
-        "benchmark_time.h": "c"
+        "benchmark_time.h": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }
