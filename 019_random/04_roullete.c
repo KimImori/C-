@@ -25,9 +25,30 @@ int main()
     int balance = 0;
     srand(time(NULL));
     int counter = 0;
+    int bet = 100;
+    int counter_2 = 0;
     while(counter < ITERATIONS)
     {
-        int prize = game_bet(RED, 100);
+        int prize = game_bet(RED,bet);
+        if(prize > 0)
+        {
+            counter_2 = 0;
+            bet = 100;
+        }
+        else
+        {
+            if(counter_2 < 5)
+            {
+                 bet *= 2;
+                 counter_2++;
+            }
+            else
+            {
+               counter_2 = 0; 
+               bet = 100; 
+            }
+        
+        }
         balance += prize;
         if((counter % 1000) == 0)
         {
@@ -62,6 +83,7 @@ Roullete roll_roullet()
 
 int game_bet(enum RoulleteColor color,int price_bet)
 {
+
     Roullete roll = roll_roullet();
     if(color == roll.color)
     {

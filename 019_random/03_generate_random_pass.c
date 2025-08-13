@@ -19,7 +19,7 @@ char *generate_pass(int n);
 int main()
 {
     srand(time(NULL));
-    char *pass = generate_pass(16);
+    char *pass = generate_pass(8);
     printf("pass - \"%s\"\n", pass);
     free(pass);
     return 0;
