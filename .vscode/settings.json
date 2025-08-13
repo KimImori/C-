@@ -10,6 +10,8 @@
         "stdlib.h": "c",
         "csv.h": "c",
         "string_utils.h": "c",
-        "array_utils.h": "c"
+        "array_utils.h": "c",
+        "random_utils.h": "c",
+        "benchmark_time.h": "c"
     }
 }
